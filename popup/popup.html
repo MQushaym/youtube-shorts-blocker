@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YouTube Shorts Blocker</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo-wrapper">
+        <svg class="logo-icon" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z"/>
+          <line x1="4" y1="4" x2="20" y2="20" stroke="#ff3333" stroke-width="2.5" stroke-linecap="round"/>
+        </svg>
+        <div class="title-group">
+          <h1>حاجب الشورتس</h1>
+          <span class="subtitle">Shorts Blocker</span>
+        </div>
+      </div>
+      <div id="statusBadge" class="status-badge active">
+        <span class="status-dot"></span>
+        <span id="statusText">مفعّل</span>
+      </div>
+    </header>
+
+    <!-- Main Switch -->
+    <div class="card master-card">
+      <div class="card-info">
+        <span class="card-title">تفعيل الحظر الكلي</span>
+        <span class="card-desc">تشغيل أو إيقاف حجب مقاطع الشورتس بالكامل</span>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="toggleEnabled" checked>
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <!-- Stats Box -->
+    <div class="stats-box">
+      <div class="stats-icon">🛡️</div>
+      <div class="stats-content">
+        <span class="stats-number" id="blockedCount">0</span>
+        <span class="stats-label">عنصر شورتس تم حجبه</span>
+      </div>
+      <button id="resetStatsBtn" class="btn-icon" title="تصفير العداد">🔄</button>
+    </div>
+
+    <!-- Options List -->
+    <div class="options-group">
+      <h2 class="section-title">خيارات الحجب والتخصيص</h2>
+
+      <!-- Sidebar Shorts -->
+      <div class="option-item">
+        <div class="option-info">
+          <span class="option-name">إخفاء زر الشريط الجانبي</span>
+          <span class="option-desc">إزالة خيار Shorts من القائمة الجانبية</span>
+        </div>
+        <label class="switch switch-sm">
+          <input type="checkbox" id="toggleSidebar" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Feed / Shelves -->
+      <div class="option-item">
+        <div class="option-info">
+          <span class="option-name">إخفاء رفوف ومقاطع الشورتس</span>
+          <span class="option-desc">حذف الرفوف من الرئيسية والبحث والقنوات</span>
+        </div>
+        <label class="switch switch-sm">
+          <input type="checkbox" id="toggleFeed" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- URL Auto-Redirect -->
+      <div class="option-item">
+        <div class="option-info">
+          <span class="option-name">تحويل الروابط للمشغل العادي</span>
+          <span class="option-desc">فتح روابط الشورتس كفيديو يوتيوب تقليدي</span>
+        </div>
+        <label class="switch switch-sm">
+          <input type="checkbox" id="toggleRedirect" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+    </div>
+
+    <!-- Action Footer -->
+    <footer class="footer">
+      <button id="refreshTabBtn" class="btn btn-secondary">
+        <span>تحديث صفحة يوتيوب الحالية</span>
+      </button>
+      <div class="footer-note">الإصدار 1.0.0 • صُممت لتقديم أفضل تجربة تصفح</div>
+    </footer>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

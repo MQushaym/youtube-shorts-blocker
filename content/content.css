@@ -1,0 +1,74 @@
+/* ==========================================================================
+   YouTube Shorts Blocker - Comprehensive CSS Rules
+   Hides Shorts with ZERO visual flashing (document_start injection)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Sidebar & Navigation Elements (Mini-guide & Main Drawer Guide)
+   -------------------------------------------------------------------------- */
+:root:not(.yt-blocker-disabled):not(.yt-show-sidebar) ytd-guide-entry-renderer:has(a[href^="/shorts"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-sidebar) ytd-guide-entry-renderer:has(a[title="Shorts"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-sidebar) ytd-guide-entry-renderer:has(a[title="شورتس"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-sidebar) ytd-guide-entry-renderer:has(a[title="مقاطع Shorts"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-sidebar) ytd-mini-guide-entry-renderer:has(a[href^="/shorts"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-sidebar) ytd-mini-guide-entry-renderer[aria-label="Shorts"],
+:root:not(.yt-blocker-disabled):not(.yt-show-sidebar) ytd-mini-guide-entry-renderer[aria-label="شورتس"],
+:root:not(.yt-blocker-disabled):not(.yt-show-sidebar) ytd-mini-guide-entry-renderer[aria-label="مقاطع Shorts"],
+:root:not(.yt-blocker-disabled):not(.yt-show-sidebar) ytm-pivot-bar-item-renderer:has(div[aria-label*="Shorts"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-sidebar) ytm-pivot-bar-item-renderer:has(div[aria-label*="شورتس"]) {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   2. Shorts Shelves & Sections (Home, Subscriptions, Search & Grid Feeds)
+   -------------------------------------------------------------------------- */
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) ytd-rich-shelf-renderer[is-shorts],
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) ytd-rich-section-renderer:has(ytd-rich-shelf-renderer[is-shorts]),
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) ytd-rich-section-renderer:has(ytd-reel-shelf-renderer),
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) ytd-reel-shelf-renderer,
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) ytd-shelf-renderer:has(ytd-reel-shelf-renderer),
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) ytd-rich-grid-row:has(ytd-rich-shelf-renderer[is-shorts]),
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) grid-shelf-view-model:has(a[href^="/shorts"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) ytd-reel-item-renderer {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   3. Individual Video Cards with Shorts links (Search results, Recommendations, Channel grid)
+   -------------------------------------------------------------------------- */
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) ytd-video-renderer:has(a[href^="/shorts/"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) ytd-rich-item-renderer:has(a[href^="/shorts/"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) ytd-compact-video-renderer:has(a[href^="/shorts/"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) ytd-grid-video-renderer:has(a[href^="/shorts/"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) ytm-shorts-lockup-view-model,
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) yt-lockup-view-model:has(a[href^="/shorts/"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) ytd-item-section-renderer:has(a[href^="/shorts/"]:only-child) {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   4. Channel Page Tabs (Shorts Tab)
+   -------------------------------------------------------------------------- */
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) yt-tab-shape[tab-title="Shorts"],
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) yt-tab-shape[tab-title="شورتس"],
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) yt-tab-shape[tab-title="مقاطع Shorts"],
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) tp-yt-paper-tab:has([aria-label*="Shorts"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) tp-yt-paper-tab:has([aria-label*="شورتس"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-feed) yt-tab-group-shape yt-tab-shape:has(div[text*="Shorts"]) {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  pointer-events: none !important;
+}
