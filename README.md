@@ -53,8 +53,9 @@
 
 1. قم بتنزيل أو استنساخ المستودع (Clone / Download ZIP):
    ```bash
-   git clone https://github.com/YourUsername/youtube-shorts-blocker.git
+   git clone https://github.com/MQushaym/youtube-shorts-blocker.git
    ```
+   *أو يمكنك [تحميل الملف المضغوط مباشرة (Download ZIP)](https://github.com/MQushaym/youtube-shorts-blocker/archive/refs/heads/main.zip) وفك الضغط عنه.*
 2. افتح صفحة إدارة الإضافات في متصفحك:
    - **Google Chrome**: اكتب `chrome://extensions/`
    - **Microsoft Edge**: اكتب `edge://extensions/`
