@@ -7,6 +7,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const toggleEnabled = document.getElementById('toggleEnabled');
   const toggleSidebar = document.getElementById('toggleSidebar');
   const toggleFeed = document.getElementById('toggleFeed');
+  const togglePlayables = document.getElementById('togglePlayables');
+  const toggleMoreSection = document.getElementById('toggleMoreSection');
   const toggleRedirect = document.getElementById('toggleRedirect');
   const blockedCountEl = document.getElementById('blockedCount');
   const resetStatsBtn = document.getElementById('resetStatsBtn');
@@ -18,6 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     enabled: true,
     hideSidebar: true,
     hideFeed: true,
+    hidePlayables: true,
+    hideMoreFromYouTube: true,
     autoRedirect: true,
     blockedCount: 0
   };
@@ -37,7 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Disable sub-options if master switch is off
-    [toggleSidebar, toggleFeed, toggleRedirect].forEach(toggle => {
+    [toggleSidebar, toggleFeed, togglePlayables, toggleMoreSection, toggleRedirect].forEach(toggle => {
       toggle.disabled = !enabled;
       const optionItem = toggle.closest('.option-item');
       if (optionItem) {
@@ -53,12 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
   function loadSettings() {
     if (chrome.storage && chrome.storage.sync) {
       chrome.storage.sync.get(defaultSettings, (settings) => {
-        toggleEnabled.checked = settings.enabled;
-        toggleSidebar.checked = settings.hideSidebar;
-        toggleFeed.checked = settings.hideFeed;
-        toggleRedirect.checked = settings.autoRedirect;
+        toggleEnabled.checked = settings.enabled !== undefined ? settings.enabled : true;
+        toggleSidebar.checked = settings.hideSidebar !== undefined ? settings.hideSidebar : true;
+        toggleFeed.checked = settings.hideFeed !== undefined ? settings.hideFeed : true;
+        togglePlayables.checked = settings.hidePlayables !== undefined ? settings.hidePlayables : true;
+        toggleMoreSection.checked = settings.hideMoreFromYouTube !== undefined ? settings.hideMoreFromYouTube : true;
+        toggleRedirect.checked = settings.autoRedirect !== undefined ? settings.autoRedirect : true;
         blockedCountEl.textContent = (settings.blockedCount || 0).toLocaleString('ar-EG');
-        updateBadge(settings.enabled);
+        updateBadge(toggleEnabled.checked);
       });
     }
   }
@@ -71,6 +77,8 @@ document.addEventListener('DOMContentLoaded', () => {
       enabled: toggleEnabled.checked,
       hideSidebar: toggleSidebar.checked,
       hideFeed: toggleFeed.checked,
+      hidePlayables: togglePlayables.checked,
+      hideMoreFromYouTube: toggleMoreSection.checked,
       autoRedirect: toggleRedirect.checked
     };
 
@@ -85,6 +93,8 @@ document.addEventListener('DOMContentLoaded', () => {
   toggleEnabled.addEventListener('change', saveSettings);
   toggleSidebar.addEventListener('change', saveSettings);
   toggleFeed.addEventListener('change', saveSettings);
+  togglePlayables.addEventListener('change', saveSettings);
+  toggleMoreSection.addEventListener('change', saveSettings);
   toggleRedirect.addEventListener('change', saveSettings);
 
   // Reset Stats

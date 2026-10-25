@@ -16,8 +16,8 @@
           <line x1="4" y1="4" x2="20" y2="20" stroke="#ff3333" stroke-width="2.5" stroke-linecap="round"/>
         </svg>
         <div class="title-group">
-          <h1>حاجب الشورتس</h1>
-          <span class="subtitle">Shorts Blocker</span>
+          <h1>حاجب الشورتس والمشتتات</h1>
+          <span class="subtitle">YouTube Clean & Blocker</span>
         </div>
       </div>
       <div id="statusBadge" class="status-badge active">
@@ -30,7 +30,7 @@
     <div class="card master-card">
       <div class="card-info">
         <span class="card-title">تفعيل الحظر الكلي</span>
-        <span class="card-desc">تشغيل أو إيقاف حجب مقاطع الشورتس بالكامل</span>
+        <span class="card-desc">تشغيل أو إيقاف حجب مقاطع الشورتس والمشتتات</span>
       </div>
       <label class="switch">
         <input type="checkbox" id="toggleEnabled" checked>
@@ -43,7 +43,7 @@
       <div class="stats-icon">🛡️</div>
       <div class="stats-content">
         <span class="stats-number" id="blockedCount">0</span>
-        <span class="stats-label">عنصر شورتس تم حجبه</span>
+        <span class="stats-label">عنصر مشتت تم حجبه</span>
       </div>
       <button id="resetStatsBtn" class="btn-icon" title="تصفير العداد">🔄</button>
     </div>
@@ -55,7 +55,7 @@
       <!-- Sidebar Shorts -->
       <div class="option-item">
         <div class="option-info">
-          <span class="option-name">إخفاء زر الشريط الجانبي</span>
+          <span class="option-name">إخفاء زر Shorts من الشريط الجانبي</span>
           <span class="option-desc">إزالة خيار Shorts من القائمة الجانبية</span>
         </div>
         <label class="switch switch-sm">
@@ -67,11 +67,35 @@
       <!-- Feed / Shelves -->
       <div class="option-item">
         <div class="option-info">
-          <span class="option-name">إخفاء رفوف ومقاطع الشورتس</span>
+          <span class="option-name">إخفاء رفوف ومقاطع Shorts</span>
           <span class="option-desc">حذف الرفوف من الرئيسية والبحث والقنوات</span>
         </div>
         <label class="switch switch-sm">
           <input type="checkbox" id="toggleFeed" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- Playables / Games (NEW) -->
+      <div class="option-item">
+        <div class="option-info">
+          <span class="option-name">إخفاء ألعاب يوتيوب (Playables)</span>
+          <span class="option-desc">حذف رفوف وبطاقات الألعاب من الصفحة الرئيسية</span>
+        </div>
+        <label class="switch switch-sm">
+          <input type="checkbox" id="togglePlayables" checked>
+          <span class="slider"></span>
+        </label>
+      </div>
+
+      <!-- More from YouTube (NEW) -->
+      <div class="option-item">
+        <div class="option-info">
+          <span class="option-name">إخفاء قسم "المزيد من YouTube"</span>
+          <span class="option-desc">إزالة روابط Premium و Music و Kids من الشريط</span>
+        </div>
+        <label class="switch switch-sm">
+          <input type="checkbox" id="toggleMoreSection" checked>
           <span class="slider"></span>
         </label>
       </div>
@@ -94,7 +118,7 @@
       <button id="refreshTabBtn" class="btn btn-secondary">
         <span>تحديث صفحة يوتيوب الحالية</span>
       </button>
-      <div class="footer-note">الإصدار 1.0.0 • صُممت لتقديم أفضل تجربة تصفح</div>
+      <div class="footer-note">الإصدار 1.1.0 • صُممت لتقديم أفضل تجربة تصفح نظيفة</div>
     </footer>
   </div>
 

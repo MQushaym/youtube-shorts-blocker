@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
   "name": "YouTube Shorts Blocker - حاجب شورتس",
-  "version": "1.0.0",
-  "description": "إخفاء وحظر مقاطع وشريط يوتيوب شورتس والتحويل للمشغل العادي تلقائياً.",
+  "version": "1.1.0",
+  "description": "إخفاء وحظر مقاطع وشريط يوتيوب شورتس، ألعاب Playables، وقسم المزيد من YouTube والتحويل للمشغل العادي.",
   "permissions": [
     "storage"
   ],

@@ -11,6 +11,8 @@
     enabled: true,
     hideSidebar: true,
     hideFeed: true,
+    hidePlayables: true,
+    hideMoreFromYouTube: true,
     autoRedirect: true,
     blockedCount: 0
   };
@@ -27,7 +29,7 @@
 
     if (!config.enabled) {
       root.classList.add('yt-blocker-disabled');
-      root.classList.remove('yt-show-sidebar', 'yt-show-feed');
+      root.classList.remove('yt-show-sidebar', 'yt-show-feed', 'yt-show-playables', 'yt-show-more-section');
     } else {
       root.classList.remove('yt-blocker-disabled');
       
@@ -41,6 +43,18 @@
         root.classList.remove('yt-show-feed');
       } else {
         root.classList.add('yt-show-feed');
+      }
+
+      if (config.hidePlayables) {
+        root.classList.remove('yt-show-playables');
+      } else {
+        root.classList.add('yt-show-playables');
+      }
+
+      if (config.hideMoreFromYouTube) {
+        root.classList.remove('yt-show-more-section');
+      } else {
+        root.classList.add('yt-show-more-section');
       }
     }
   }
@@ -100,7 +114,7 @@
    * Selectors used for JavaScript DOM cleanup & verification
    */
   const SHORTS_SELECTORS = [
-    // Sidebar
+    // Sidebar Shorts
     'ytd-guide-entry-renderer:has(a[href^="/shorts"])',
     'ytd-mini-guide-entry-renderer:has(a[href^="/shorts"])',
     'ytd-guide-entry-renderer a[title="Shorts"]',
@@ -128,19 +142,46 @@
     'tp-yt-paper-tab:has([aria-label*="شورتس"])'
   ];
 
+  const PLAYABLES_SELECTORS = [
+    'ytd-rich-section-renderer:has(a[href^="/playables"])',
+    'ytd-rich-section-renderer:has(ytd-rich-shelf-renderer[is-mini-game-card-shelf])',
+    'ytd-rich-section-renderer:has(ytd-mini-game-card-view-model)',
+    'ytd-rich-section-renderer:has(mini-game-card-view-model)',
+    'ytd-rich-shelf-renderer:has(a[href^="/playables"])',
+    'ytd-rich-shelf-renderer[is-mini-game-card-shelf]',
+    'ytd-mini-game-card-view-model',
+    'mini-game-card-view-model',
+    'ytd-rich-item-renderer:has(a[href^="/playables"])',
+    'ytd-guide-entry-renderer:has(a[href^="/playables"])',
+    'ytd-mini-guide-entry-renderer:has(a[href^="/playables"])'
+  ];
+
+  const MORE_YOUTUBE_SELECTORS = [
+    'ytd-guide-section-renderer:has(a[href*="/premium"])',
+    'ytd-guide-section-renderer:has(a[href*="music.youtube.com"])',
+    'ytd-guide-section-renderer:has(a[href*="youtubekids.com"])',
+    'ytd-guide-entry-renderer:has(a[href*="/premium"])',
+    'ytd-guide-entry-renderer:has(a[href*="music.youtube.com"])',
+    'ytd-guide-entry-renderer:has(a[href*="youtubekids.com"])',
+    'ytd-mini-guide-entry-renderer:has(a[href*="/premium"])',
+    'ytd-mini-guide-entry-renderer:has(a[href*="music.youtube.com"])',
+    'ytd-mini-guide-entry-renderer:has(a[href*="youtubekids.com"])'
+  ];
+
   /**
-   * Scan and mark/clean shorts elements
+   * Scan and mark/clean items
    */
   let isScanning = false;
-  function scanAndCleanShorts() {
+  function scanAndClean() {
     if (!config.enabled) return;
     if (isScanning) return;
     isScanning = true;
 
     try {
-      // 1. Clean elements matching selectors
+      let foundNew = 0;
+
+      // 1. Shorts cleaning
       if (config.hideFeed || config.hideSidebar) {
-        let foundNew = 0;
         SHORTS_SELECTORS.forEach(selector => {
           try {
             const elements = document.querySelectorAll(selector);
@@ -151,17 +192,12 @@
                 foundNew++;
               }
             });
-          } catch (e) {
-            // Some CSS :has selectors might not be supported in older engines
-          }
+          } catch (e) {}
         });
 
-        // 2. Extra scan for anchor tags pointing to /shorts/
         const shortsLinks = document.querySelectorAll('a[href^="/shorts/"]:not([data-yt-shorts-checked])');
         shortsLinks.forEach(link => {
           link.setAttribute('data-yt-shorts-checked', 'true');
-          
-          // Traverse up to find video container item
           const container = link.closest(
             'ytd-rich-item-renderer, ytd-video-renderer, ytd-compact-video-renderer, ytd-grid-video-renderer, yt-lockup-view-model, ytd-rich-section-renderer'
           );
@@ -171,10 +207,55 @@
             foundNew++;
           }
         });
+      }
 
-        if (foundNew > 0) {
-          incrementBlockCount(foundNew);
-        }
+      // 2. Playables / Games cleaning
+      if (config.hidePlayables) {
+        PLAYABLES_SELECTORS.forEach(selector => {
+          try {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(el => {
+              if (!el.dataset.ytPlayablesBlocked) {
+                el.dataset.ytPlayablesBlocked = 'true';
+                el.style.setProperty('display', 'none', 'important');
+                foundNew++;
+              }
+            });
+          } catch (e) {}
+        });
+
+        const playablesLinks = document.querySelectorAll('a[href*="/playables"]:not([data-yt-playables-checked])');
+        playablesLinks.forEach(link => {
+          link.setAttribute('data-yt-playables-checked', 'true');
+          const container = link.closest(
+            'ytd-rich-section-renderer, ytd-rich-shelf-renderer, ytd-rich-item-renderer, ytd-guide-entry-renderer, ytd-mini-guide-entry-renderer'
+          );
+          if (container && !container.dataset.ytPlayablesBlocked) {
+            container.dataset.ytPlayablesBlocked = 'true';
+            container.style.setProperty('display', 'none', 'important');
+            foundNew++;
+          }
+        });
+      }
+
+      // 3. More from YouTube sidebar cleaning
+      if (config.hideMoreFromYouTube) {
+        MORE_YOUTUBE_SELECTORS.forEach(selector => {
+          try {
+            const elements = document.querySelectorAll(selector);
+            elements.forEach(el => {
+              if (!el.dataset.ytMoreSectionBlocked) {
+                el.dataset.ytMoreSectionBlocked = 'true';
+                el.style.setProperty('display', 'none', 'important');
+                foundNew++;
+              }
+            });
+          } catch (e) {}
+        });
+      }
+
+      if (foundNew > 0) {
+        incrementBlockCount(foundNew);
       }
     } finally {
       isScanning = false;
@@ -194,7 +275,7 @@
         if (stored) {
           config = { ...config, ...stored };
           applyClasses();
-          scanAndCleanShorts();
+          scanAndClean();
         }
       });
 
@@ -208,7 +289,7 @@
           }
           applyClasses();
           handleUrlRedirect();
-          scanAndCleanShorts();
+          scanAndClean();
         }
       });
     } else {
@@ -218,12 +299,12 @@
     // 3. YouTube SPA lifecycle events
     window.addEventListener('yt-navigate-finish', () => {
       if (!handleUrlRedirect()) {
-        scanAndCleanShorts();
+        scanAndClean();
       }
     });
 
     window.addEventListener('yt-page-data-updated', () => {
-      scanAndCleanShorts();
+      scanAndClean();
     });
 
     window.addEventListener('popstate', () => {
@@ -243,7 +324,7 @@
       }
 
       if (shouldScan) {
-        scanAndCleanShorts();
+        scanAndClean();
       }
     });
 
@@ -254,14 +335,14 @@
           childList: true,
           subtree: true
         });
-        scanAndCleanShorts();
+        scanAndClean();
       } else {
         document.addEventListener('DOMContentLoaded', () => {
           observer.observe(document.body, {
             childList: true,
             subtree: true
           });
-          scanAndCleanShorts();
+          scanAndClean();
         });
       }
     };

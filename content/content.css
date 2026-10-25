@@ -1,6 +1,6 @@
 /* ==========================================================================
    YouTube Shorts Blocker - Comprehensive CSS Rules
-   Hides Shorts with ZERO visual flashing (document_start injection)
+   Hides Shorts, Playables & Clutter with ZERO visual flashing (document_start injection)
    ========================================================================== */
 
 /* --------------------------------------------------------------------------
@@ -70,5 +70,45 @@
   display: none !important;
   visibility: hidden !important;
   width: 0 !important;
+  pointer-events: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   5. YouTube Playables (Games Shelf & Mini Game Cards)
+   -------------------------------------------------------------------------- */
+:root:not(.yt-blocker-disabled):not(.yt-show-playables) ytd-rich-section-renderer:has(a[href^="/playables"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-playables) ytd-rich-section-renderer:has(ytd-rich-shelf-renderer[is-mini-game-card-shelf]),
+:root:not(.yt-blocker-disabled):not(.yt-show-playables) ytd-rich-section-renderer:has(ytd-mini-game-card-view-model),
+:root:not(.yt-blocker-disabled):not(.yt-show-playables) ytd-rich-section-renderer:has(mini-game-card-view-model),
+:root:not(.yt-blocker-disabled):not(.yt-show-playables) ytd-rich-shelf-renderer:has(a[href^="/playables"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-playables) ytd-rich-shelf-renderer[is-mini-game-card-shelf],
+:root:not(.yt-blocker-disabled):not(.yt-show-playables) ytd-mini-game-card-view-model,
+:root:not(.yt-blocker-disabled):not(.yt-show-playables) mini-game-card-view-model,
+:root:not(.yt-blocker-disabled):not(.yt-show-playables) ytd-rich-item-renderer:has(a[href^="/playables"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-playables) ytd-guide-entry-renderer:has(a[href^="/playables"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-playables) ytd-mini-guide-entry-renderer:has(a[href^="/playables"]) {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+}
+
+/* --------------------------------------------------------------------------
+   6. Sidebar "More from YouTube" Section (Premium, Music, Kids)
+   -------------------------------------------------------------------------- */
+:root:not(.yt-blocker-disabled):not(.yt-show-more-section) ytd-guide-section-renderer:has(a[href*="/premium"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-more-section) ytd-guide-section-renderer:has(a[href*="music.youtube.com"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-more-section) ytd-guide-section-renderer:has(a[href*="youtubekids.com"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-more-section) ytd-guide-entry-renderer:has(a[href*="/premium"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-more-section) ytd-guide-entry-renderer:has(a[href*="music.youtube.com"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-more-section) ytd-guide-entry-renderer:has(a[href*="youtubekids.com"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-more-section) ytd-mini-guide-entry-renderer:has(a[href*="/premium"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-more-section) ytd-mini-guide-entry-renderer:has(a[href*="music.youtube.com"]),
+:root:not(.yt-blocker-disabled):not(.yt-show-more-section) ytd-mini-guide-entry-renderer:has(a[href*="youtubekids.com"]) {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  opacity: 0 !important;
   pointer-events: none !important;
 }

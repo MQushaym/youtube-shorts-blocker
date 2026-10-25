@@ -1,19 +1,20 @@
 <div align="center">
 
-# 🛡️ YouTube Shorts Blocker | حاجب يوتيوب شورتس
+# 🛡️ YouTube Shorts & Distractions Blocker | حاجب يوتيوب شورتس والمشتتات
 
 [![Manifest V3](https://img.shields.io/badge/Manifest-V3-success.svg?style=flat-square)](https://developer.chrome.com/docs/extensions/mv3/intro/)
+[![Version](https://img.shields.io/badge/Version-1.1.0-blue.svg?style=flat-square)](https://github.com/MQushaym/youtube-shorts-blocker)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE)
 [![Chrome](https://img.shields.io/badge/Chrome-Compatible-brightgreen.svg?style=flat-square&logo=googlechrome)](https://www.google.com/chrome/)
 [![Edge](https://img.shields.io/badge/Edge-Compatible-blue.svg?style=flat-square&logo=microsoftedge)](https://www.microsoft.com/edge)
 [![Brave](https://img.shields.io/badge/Brave-Compatible-orange.svg?style=flat-square&logo=brave)](https://brave.com/)
 [![Privacy: 100% Client-Side](https://img.shields.io/badge/Privacy-100%25%20Client--Side-purple.svg?style=flat-square)](#-privacy--security-policy)
 
-**A lightweight, privacy-focused browser extension (Manifest V3) to completely hide YouTube Shorts and redirect short links to the classic video player.**
+**A lightweight, privacy-focused browser extension (Manifest V3) to completely hide YouTube Shorts, YouTube Playables (Mini Games), and clutter sections, while redirecting short links to the classic video player.**
 
-**إضافة متصفح خفيفة وآمنة (Manifest V3) لإخفاء وحظر مقاطع وشريط YouTube Shorts بالكامل، مع تحويل الروابط تلقائياً إلى المشغل التقليدي.**
+**إضافة متصفح خفيفة وآمنة (Manifest V3) لإخفاء وحظر مقاطع وشريط YouTube Shorts، وألعاب يوتيوب (Playables)، وقسم "المزيد من YouTube" من الشريط الجانبي، مع تحويل الروابط تلقائياً إلى المشغل التقليدي.**
 
-[المميزات](#-المميزات-العربية) • [English Features](#-features-english) • [طريقة التثبيت](#-طريقة-التثبيت-والتشغيل) • [Privacy Policy](#-privacy--security-policy) • [License](#-license)
+[المميزات](#-المميزات-العربية) • [English Features](#-features-english) • [طريقة التثبيت](#-طريقة-التثبيت-والتشغيل--installation-guide) • [Privacy Policy](#-privacy--security-policy) • [License](#-license)
 
 ---
 
@@ -25,13 +26,17 @@
    - إزالة خيار الشورتس من القائمة الجانبية الموسعة والمصغرة (Sidebar & Mini Guide).
 2. **إخفاء رفوف وفيديوهات Shorts**:
    - تنظيف الصفحة الرئيسية، صفحة الاشتراكات، نتائج البحث، وتبويب القنوات من أي رفوف أو فيديوهات Shorts.
-3. **حظر فوري بدون وميض (Zero Layout Shift)**:
-   - حقن فوري لأنماط الـ CSS عند بداية تحميل الصفحة (`document_start`) لمنع ظهور الشورتس ولو لجزء من الثانية.
-4. **التحويل التلقائي للمشغل التقليدي (Auto-Redirect)**:
+3. **🎮 حظر ألعاب يوتيوب (YouTube Playables)** *(جديد في v1.1)*:
+   - إزالة رفوف وبطاقات الألعاب الفورية المزعجة من الصفحة الرئيسية ومن الشريط الجانبي.
+4. **🧹 تنظيف قسم "المزيد من YouTube"** *(جديد في v1.1)*:
+   - إخفاء القسم الإضافي من الشريط الجانبي الذي يحتوي على (YouTube Premium, YouTube Music, YouTube Kids).
+5. **حظر فوري بدون وميض (Zero Layout Shift)**:
+   - حقن فوري لأنماط الـ CSS عند بداية تحميل الصفحة (`document_start`) لمنع ظهور المشتتات ولو لجزء من الثانية.
+6. **التحويل التلقائي للمشغل التقليدي (Auto-Redirect)**:
    - فتح أي رابط شورتس مثل `youtube.com/shorts/VIDEO_ID` في مشغل اليوتيوب العادي `youtube.com/watch?v=VIDEO_ID`.
-5. **لوحة تحكم وتخصيص أنيقة (Popup UI)**:
-   - مفاتيح للتحكم في تفعيل أو تعطيل أي ميزة مع عداد إحصائي مباشر لعناصر الشورتس المحجوبة.
-6. **100% آمنة وخاصة**:
+7. **لوحة تحكم وتخصيص أنيقة (Popup UI)**:
+   - مفاتيح للتحكم في تفعيل أو تعطيل أي ميزة مع عداد إحصائي مباشر للعناصر المحجوبة.
+8. **100% آمنة وخاصة**:
    - لا تتطلب صلاحيات معقدة، وتعمل محلياً بالكامل بدون جمع أو إرسال أي بيانات خارجية.
 
 ---
@@ -40,6 +45,8 @@
 
 - 🚫 **Hide Sidebar Shorts Button**: Seamlessly removes the Shorts icon and navigation entry from YouTube's expanded and mini sidebar.
 - 🧹 **Clean Feeds & Shelves**: Automatically filters out Shorts shelves, video grids, and recommendation items across Home, Subscriptions, Search Results, and Channel pages.
+- 🎮 **Block YouTube Playables (Mini Games)** *(New in v1.1)*: Completely hides the Playables shelf and instant game cards on the home feed and sidebar.
+- 🏷️ **Remove "More from YouTube" Sidebar Section** *(New in v1.1)*: Cleans out the unnecessary promo section (YouTube Premium, Music, Kids) from the sidebar.
 - ⚡ **Zero-Flicker CSS Injection**: CSS rules are applied at `document_start`, guaranteeing no visual flashing or layout shifts while pages load.
 - 🔄 **Smart URL Auto-Redirection**: Automatically redirects `/shorts/VIDEO_ID` to the standard desktop player (`/watch?v=VIDEO_ID`).
 - 🎛️ **Modern Extension Popup**: Full control over features with individual toggle switches, dark theme design, and a live blocked-count tracker.
